@@ -34,4 +34,13 @@ void main() {
     expect(sut.isNotEmpty, true);
     expect(sut.length, inMemoryUsers);
   });
+
+  test("should be return a empty user list", () async {
+    FindAllUsersUseCase findAllUsersUseCase = FindAllUsersUseCase(interfaceUserRepository: UserMemoryRepository(inMemoryUsers: null));
+
+    final sut = await findAllUsersUseCase.execute();
+
+    expect(sut.isEmpty, true);
+    expect(sut.length, 0);
+  });
 }
