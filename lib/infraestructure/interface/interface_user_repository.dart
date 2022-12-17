@@ -1,5 +1,5 @@
 import 'package:ebooking/core/entities/user.dart';
 
 abstract class InterfaceUserRepository {
-  Future<String> createNewUser(User user);
+  Future<String> createNewUser({required User user});
 }

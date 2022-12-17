@@ -7,11 +7,11 @@ class CreateNewUserUseCase {
 
   CreateNewUserUseCase({required this.interfaceUserRepository});
 
-  Future<String> execute(User? user) async {
+  Future<String> execute({required User? user}) async {
     if (user == null) {
       return 'User cannot be null!';
     }
 
-    return await interfaceUserRepository.createNewUser(user);
+    return await interfaceUserRepository.createNewUser(user: user);
   }
 }

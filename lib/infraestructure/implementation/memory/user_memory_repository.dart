@@ -3,6 +3,6 @@ import 'package:ebooking/infraestructure/interface/interface_user_repository.dar
 
 class UserMemoryRepository implements InterfaceUserRepository {
   @override
-  Future<String> createNewUser(User user) async => 'User created successfully!';
+  Future<String> createNewUser({required User user}) async => 'User created successfully!';
 
 }

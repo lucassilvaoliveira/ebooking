@@ -8,8 +8,16 @@ void main() {
     User user = User(id: "any_id", username: "any_username", email: "any_email", password: "any_password");
     CreateNewUserUseCase createNewUserUseCase = CreateNewUserUseCase(interfaceUserRepository: UserMemoryRepository());
 
-    final sut = await createNewUserUseCase.execute(user);
+    final sut = await createNewUserUseCase.execute(user: user);
 
     expect(sut, "User created successfully!");
+  });
+
+  test("should be return error because trying create a null user", () async {
+    CreateNewUserUseCase createNewUserUseCase = CreateNewUserUseCase(interfaceUserRepository: UserMemoryRepository());
+
+    final sut = await createNewUserUseCase.execute(user: null);
+
+    expect(sut, "User cannot be null!");
   });
 }
