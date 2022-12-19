@@ -3,13 +3,13 @@ class Book {
   String title;
   String description;
   String language;
-  String category;
   String status;
   bool favorite = false;
   bool reading;
   bool interesting;
   int pageCount;
   double rating;
+  List<String> category;
   List<String> authors;
   List<String> imageLinks;
   DateTime publishedAt;
