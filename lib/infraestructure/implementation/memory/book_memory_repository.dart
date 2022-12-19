@@ -25,4 +25,12 @@ class BookMemoryRepository implements InterfaceBookRepository {
     book.rating = newRating;
     return book;
   }
+  
+  @override
+  Future<List<Book>> findBookByTitle({required List<Book> books, required String titleToFind}) async {
+    return books.where((element) {
+      if (element.title == titleToFind) return true;
+      return false;
+    }).toList();
+  }
 }
