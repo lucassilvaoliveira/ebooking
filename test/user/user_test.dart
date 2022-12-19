@@ -43,4 +43,21 @@ void main() {
     expect(sut.isEmpty, true);
     expect(sut.length, 0);
   });
+
+  test("should be can return empty or populated user list", () async {
+    final random = Random();
+    final inMemoryUsers = random.nextInt(2);
+    FindAllUsersUseCase findAllUsersUseCase = FindAllUsersUseCase(interfaceUserRepository: UserMemoryRepository(inMemoryUsers: inMemoryUsers));
+
+    final sut = await findAllUsersUseCase.execute();
+
+    if (inMemoryUsers == 0) {
+      expect(sut.length, 0);
+      expect(sut.isEmpty, true);
+      return;
+    }
+
+    expect(sut.isNotEmpty, true);
+    expect(sut.length, inMemoryUsers);
+  });
 }

@@ -13,16 +13,18 @@ class UserMemoryRepository implements InterfaceUserRepository {
   @override
   Future<List<User>> findAllUsers() async {
     List<User> users = [];
-    if (inMemoryUsers == null) {
+    if (inMemoryUsers == null || inMemoryUsers == 0) {
       return users;
     }
 
     for (int index = 0; index < inMemoryUsers!; index++) {
-      users.add(User(
-          id: "id $index",
-          username: "username $index",
-          email: "email $index",
-          password: "password $index"));
+      users.add(
+        User(
+            id: "id $index",
+            username: "username $index",
+            email: "email $index",
+            password: "password $index"),
+      );
     }
     return users;
   }
