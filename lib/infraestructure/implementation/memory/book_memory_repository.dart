@@ -19,4 +19,10 @@ class BookMemoryRepository implements InterfaceBookRepository {
     book.interesting = !book.interesting;
     return book;
   }
+  
+  @override
+  Future<Book> defineRatingBookValue({required Book book, required double newRating}) async {
+    book.rating = newRating;
+    return book;
+  }
 }

@@ -1,7 +1,10 @@
+import 'dart:math';
+
 import 'package:ebooking/core/entities/book.dart';
 import 'package:ebooking/core/usecases/book/change_favorite_book_value_use_case.dart';
 import 'package:ebooking/core/usecases/book/change_interesting_book_value_use_case.dart';
 import 'package:ebooking/core/usecases/book/change_reading_book_value_use_case.dart';
+import 'package:ebooking/core/usecases/book/define_rating_to_book_use_case.dart';
 import 'package:ebooking/infraestructure/implementation/memory/book_memory_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -97,5 +100,33 @@ void main() {
     await changeInterestingBookValueUseCase.execute(book: sut);
 
     expect(sut.interesting, false);
+  });
+
+  test("should be define new rating book value", () async {
+    final random = Random();
+    final newRating = random.nextDouble() * 5.1;
+    DefineRatingToBookUseCase defineRatingToBookUseCase = DefineRatingToBookUseCase(interfaceBookRepository: BookMemoryRepository());
+    Book sut = Book(
+      id: "any_id",
+      title: "any_title",
+      description: "any_description",
+      language: "any_language",
+      category: "any_category",
+      status: "any_status",
+      favorite: false,
+      reading: false,
+      interesting: false,
+      pageCount: 0,
+      rating: 0,
+      authors: ["any_author"],
+      imageLinks: ["any_image_link"],
+      publishedAt: DateTime.now(),
+    );
+    
+    expect(sut.rating, 0);
+
+    await defineRatingToBookUseCase.execute(book: sut, newRating: newRating);
+
+    expect(sut.rating, newRating);
   });
 }

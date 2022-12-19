@@ -6,4 +6,6 @@ abstract class InterfaceBookRepository {
   Future<Book> changeReadingBookValue({required Book book});
 
   Future<Book> changeInterestingBookValue({required Book book});
+
+  Future<Book> defineRatingBookValue({required Book book, required double newRating});
 }
