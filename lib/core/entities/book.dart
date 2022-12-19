@@ -1,23 +1,33 @@
 class Book {
   String id;
-  List<String> authors;
   String title;
   String description;
   String language;
   String category;
+  String status;
+  bool liked;
+  bool reading;
+  bool interesting;
   int pageCount;
+  double rating;
+  List<String> authors;
   List<String> imageLinks;
   DateTime publishedAt;
 
   Book({
     required this.id,
-    required this.authors,
     required this.title,
     required this.description,
     required this.language,
     required this.category,
+    required this.status,
+    required this.liked,
+    required this.reading,
+    required this.interesting,
     required this.pageCount,
+    required this.rating,
+    required this.authors,
     required this.imageLinks,
-    required this.publishedAt
+    required this.publishedAt,
   });
 }
