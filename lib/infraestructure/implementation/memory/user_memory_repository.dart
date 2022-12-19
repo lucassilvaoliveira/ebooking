@@ -28,4 +28,15 @@ class UserMemoryRepository implements InterfaceUserRepository {
     }
     return users;
   }
+  
+  @override
+  Future<List<User>> deleteUserByIndexInList({required List<User> userList, required int indexForUserToBeDeleted}) async {
+    if (inMemoryUsers != null && inMemoryUsers != 0) {
+      userList.removeAt(indexForUserToBeDeleted);
+      return userList;
+    }
+    return [];
+  }
+  
+  
 }

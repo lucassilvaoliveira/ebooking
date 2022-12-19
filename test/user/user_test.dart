@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:ebooking/core/entities/user.dart';
 import 'package:ebooking/core/usecases/user/create_new_user_use_case.dart';
+import 'package:ebooking/core/usecases/user/delete_user_use_case.dart';
 import 'package:ebooking/core/usecases/user/find_all_users_use_case.dart';
 import 'package:ebooking/infraestructure/implementation/memory/user_memory_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -59,5 +60,19 @@ void main() {
 
     expect(sut.isNotEmpty, true);
     expect(sut.length, inMemoryUsers);
+  });
+
+  test("should be delete an user in user list", () async {
+    final random = Random();
+    final indexForUserToBeDeleted = random.nextInt(10) + 1;
+    final inMemoryUsers = random.nextInt(20) + 10;
+    UserMemoryRepository userMemoryRepository = UserMemoryRepository(inMemoryUsers: inMemoryUsers);
+    DeleteUserUseCase deleteUserUseCase = DeleteUserUseCase(interfaceUserRepository: userMemoryRepository);
+    FindAllUsersUseCase findAllUsersUseCase = FindAllUsersUseCase(interfaceUserRepository: userMemoryRepository);
+
+    final sut = await findAllUsersUseCase.execute();
+    await deleteUserUseCase.execute(userList: sut, indexForUserToBeDeleted: indexForUserToBeDeleted);
+
+    expect(sut.length, inMemoryUsers -1);
   });
 }
