@@ -4,6 +4,7 @@ import 'package:ebooking/core/entities/user.dart';
 import 'package:ebooking/core/usecases/user/create_new_user_use_case.dart';
 import 'package:ebooking/core/usecases/user/delete_user_use_case.dart';
 import 'package:ebooking/core/usecases/user/find_all_users_use_case.dart';
+import 'package:ebooking/core/usecases/user/find_user_by_id_use_case.dart';
 import 'package:ebooking/infraestructure/implementation/memory/user_memory_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -74,5 +75,21 @@ void main() {
     await deleteUserUseCase.execute(userList: sut, indexForUserToBeDeleted: indexForUserToBeDeleted);
 
     expect(sut.length, inMemoryUsers -1);
+  });
+
+  test("should be filter an user by id in user list", () async {
+    final random = Random();
+    final inMemoryUsers = random.nextInt(20);
+    const userToBeFindedId = "id_to_find";
+    UserMemoryRepository userMemoryRepository = UserMemoryRepository(inMemoryUsers: inMemoryUsers);
+    FindAllUsersUseCase findAllUsersUseCase = FindAllUsersUseCase(interfaceUserRepository: userMemoryRepository);
+    FindUserByIdUseCase findUserByIdUseCase = FindUserByIdUseCase(interfaceUserRepository: userMemoryRepository);
+
+    final userList = await findAllUsersUseCase.execute();
+    User userToBeFinded = User(id: userToBeFindedId, username: "any_username", email: "any_email", password: "any_password");
+    userList.add(userToBeFinded);
+    User sut = await findUserByIdUseCase.execute(userList: userList, userId: userToBeFindedId);
+    
+    expect(sut.id,  userToBeFindedId);
   });
 }

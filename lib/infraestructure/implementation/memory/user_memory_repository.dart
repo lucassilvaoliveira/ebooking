@@ -38,5 +38,12 @@ class UserMemoryRepository implements InterfaceUserRepository {
     return [];
   }
   
-  
+  @override
+  Future<User> findUserById({required List<User> userList, required String userId}) async {
+    User user = userList.singleWhere((element) {
+      if (element.id == userId) return true;
+      return false;
+    });
+    return user;
+  }
 }

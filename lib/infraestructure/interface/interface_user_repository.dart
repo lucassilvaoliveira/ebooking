@@ -6,4 +6,6 @@ abstract class InterfaceUserRepository {
   Future<List<User>> findAllUsers();
 
   Future<List<User>> deleteUserByIndexInList({required List<User> userList, required int indexForUserToBeDeleted});
+
+  Future<User> findUserById({required List<User> userList, required String userId});
 }
