@@ -5,7 +5,7 @@ class Book {
   String language;
   String category;
   String status;
-  bool liked;
+  bool favorite = false;
   bool reading;
   bool interesting;
   int pageCount;
@@ -21,7 +21,7 @@ class Book {
     required this.language,
     required this.category,
     required this.status,
-    required this.liked,
+    required this.favorite,
     required this.reading,
     required this.interesting,
     required this.pageCount,
