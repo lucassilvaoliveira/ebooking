@@ -7,4 +7,10 @@ class BookMemoryRepository implements InterfaceBookRepository {
     book.favorite = !book.favorite;
     return book;
   }
+
+  @override
+  Future<Book> changeReadingBookValue({required Book book}) async {
+    book.reading = !book.reading;
+    return book;
+  }
 }
