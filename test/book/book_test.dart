@@ -7,7 +7,9 @@ import 'package:ebooking/core/usecases/book/change_reading_book_value_use_case.d
 import 'package:ebooking/core/usecases/book/define_rating_to_book_use_case.dart';
 import 'package:ebooking/core/usecases/book/find_book_by_author_use_case.dart';
 import 'package:ebooking/core/usecases/book/find_book_by_name_use_case.dart';
+import 'package:ebooking/core/usecases/book/find_favorite_book_use_case.dart';
 import 'package:ebooking/infraestructure/implementation/memory/book_memory_repository.dart';
+import 'package:ebooking/infraestructure/interface/interface_book_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -211,5 +213,60 @@ void main() {
 
     expect(sut.length, 1);
     expect(sut.first.authors.first, authorToFind);
+  });
+
+  test("should be return favorite books", () async {
+    const listLenght = 10;
+    const favoriteBooks = 3;
+    List<Book> books = [];
+    for (int i = 0; i < listLenght; i++) {
+      books.add(
+        Book(
+          id: "id $i",
+          title: "title $i",
+          description: "description $i",
+          language: "language $i",
+          category: ["category $i"],
+          status: "status $i",
+          favorite: false,
+          reading: false,
+          interesting: false,
+          pageCount: 0,
+          rating: 0,
+          authors: ["authors $i"],
+          imageLinks: ["imageLinks $i"],
+          publishedAt: DateTime.now(),
+        ),
+      );
+    }
+    for (int i = 0; i < favoriteBooks; i++) {
+      books.add(
+        Book(
+          id: "id $i",
+          title: "title $i",
+          description: "description $i",
+          language: "language $i",
+          category: ["category $i"],
+          status: "status $i",
+          favorite: true,
+          reading: false,
+          interesting: false,
+          pageCount: 0,
+          rating: 0,
+          authors: ["authors $i"],
+          imageLinks: ["imageLinks $i"],
+          publishedAt: DateTime.now(),
+        ),
+      );
+    }
+
+    FindFavoriteBookUseCase findFavoriteBooksUseCase = FindFavoriteBookUseCase(
+      interfaceBookRepository: BookMemoryRepository(),
+    );
+
+    final sut = await findFavoriteBooksUseCase.execute(books: books, favorite: true);
+
+    expect(books.length, listLenght + favoriteBooks);
+    expect(sut.length, favoriteBooks);
   });
 }

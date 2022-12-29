@@ -12,4 +12,6 @@ abstract class InterfaceBookRepository {
   Future<List<Book>> findBookByTitle({required List<Book> books, required String titleToFind});
 
   Future<List<Book>> findBookByAuthor({required List<Book> books, required String authorToFind});
+
+  Future<List<Book>> findFavoriteBook({required List<Book> books, required bool favorite});
 }

@@ -41,4 +41,12 @@ class BookMemoryRepository implements InterfaceBookRepository {
       return false;
     }).toList();
   }
+  
+  @override
+  Future<List<Book>> findFavoriteBook({required List<Book> books, required bool favorite}) async {
+    return books.where((element) {
+      if (element.favorite == favorite) return true;
+      return false;
+    }).toList();
+  }
 }
