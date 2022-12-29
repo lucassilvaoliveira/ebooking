@@ -139,8 +139,7 @@ void main() {
   });
 
   test("should be find books by title", () async {
-    final random = Random();
-    final listLenght = random.nextInt(10);
+    const listLenght = 10;
     const titleToFind = "title 1";
     List<Book> sut = [];
     for (int i = 0; i < listLenght; i++) {
@@ -164,8 +163,9 @@ void main() {
       );
     }
 
-    FindBookByTitleUseCase findBookByTitleUseCase =
-        FindBookByTitleUseCase(interfaceBookRepository: BookMemoryRepository());
+    FindBookByTitleUseCase findBookByTitleUseCase = FindBookByTitleUseCase(
+      interfaceBookRepository: BookMemoryRepository(),
+    );
 
     expect(sut.length, listLenght);
 
