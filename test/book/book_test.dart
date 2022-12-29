@@ -5,6 +5,7 @@ import 'package:ebooking/core/usecases/book/change_favorite_book_value_use_case.
 import 'package:ebooking/core/usecases/book/change_interesting_book_value_use_case.dart';
 import 'package:ebooking/core/usecases/book/change_reading_book_value_use_case.dart';
 import 'package:ebooking/core/usecases/book/define_rating_to_book_use_case.dart';
+import 'package:ebooking/core/usecases/book/find_book_by_author_use_case.dart';
 import 'package:ebooking/core/usecases/book/find_book_by_name_use_case.dart';
 import 'package:ebooking/infraestructure/implementation/memory/book_memory_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -163,14 +164,52 @@ void main() {
       );
     }
 
-    FindBookByTitleUseCase findBookByTitleUseCase = FindBookByTitleUseCase(interfaceBookRepository: BookMemoryRepository());
+    FindBookByTitleUseCase findBookByTitleUseCase =
+        FindBookByTitleUseCase(interfaceBookRepository: BookMemoryRepository());
 
     expect(sut.length, listLenght);
 
-    sut = await findBookByTitleUseCase.execute(books: sut, titleToFind: titleToFind);
-
+    sut = await findBookByTitleUseCase.execute(
+        books: sut, titleToFind: titleToFind);
 
     expect(sut.length, 1);
     expect(sut.first.title, titleToFind);
+  });
+
+  test("should be find books by author", () async {
+    const listLenght = 10;
+    const authorToFind = "authors 3";
+    List<Book> books = [];
+    for (int i = 0; i < listLenght; i++) {
+      books.add(
+        Book(
+          id: "id $i",
+          title: "title $i",
+          description: "description $i",
+          language: "language $i",
+          category: ["category $i"],
+          status: "status $i",
+          favorite: false,
+          reading: false,
+          interesting: false,
+          pageCount: 0,
+          rating: 0,
+          authors: ["authors $i"],
+          imageLinks: ["imageLinks $i"],
+          publishedAt: DateTime.now(),
+        ),
+      );
+    }
+    FindBookByAuthorUseCase findBookByAuthorUseCase = FindBookByAuthorUseCase(
+      interfaceBookRepository: BookMemoryRepository(),
+    );
+
+    final sut = await findBookByAuthorUseCase.execute(
+      books: books,
+      authorToFind: authorToFind,
+    );
+
+    expect(sut.length, 1);
+    expect(sut.first.authors.first, authorToFind);
   });
 }

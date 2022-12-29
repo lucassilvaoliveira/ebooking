@@ -10,4 +10,6 @@ abstract class InterfaceBookRepository {
   Future<Book> defineRatingBookValue({required Book book, required double newRating});
 
   Future<List<Book>> findBookByTitle({required List<Book> books, required String titleToFind});
+
+  Future<List<Book>> findBookByAuthor({required List<Book> books, required String authorToFind});
 }

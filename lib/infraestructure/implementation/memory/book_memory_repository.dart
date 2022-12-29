@@ -33,4 +33,12 @@ class BookMemoryRepository implements InterfaceBookRepository {
       return false;
     }).toList();
   }
+  
+  @override
+  Future<List<Book>> findBookByAuthor({required List<Book> books, required String authorToFind}) async {
+    return books.where((element) {
+      if (element.authors.contains(authorToFind)) return true;
+      return false;
+    }).toList();
+  }
 }
