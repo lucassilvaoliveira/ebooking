@@ -9,7 +9,6 @@ import 'package:ebooking/core/usecases/book/find_book_by_author_use_case.dart';
 import 'package:ebooking/core/usecases/book/find_book_by_name_use_case.dart';
 import 'package:ebooking/core/usecases/book/find_favorite_book_use_case.dart';
 import 'package:ebooking/infraestructure/implementation/memory/book_memory_repository.dart';
-import 'package:ebooking/infraestructure/interface/interface_book_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
