@@ -1,4 +1,3 @@
-import 'package:ebooking/core/entities/user.dart';
 import 'package:ebooking/core/usecases/authentication/login_use_case.dart';
 import 'package:ebooking/infraestructure/implementation/memory/authentication_memory_repository.dart';
 import 'package:flutter_test/flutter_test.dart';
