@@ -1,3 +1,5 @@
+import 'package:ebooking/global/theme_dark.dart';
+import 'package:ebooking/global/theme_light.dart';
 import 'package:flutter/material.dart';
 
 class EbookingApp extends StatelessWidget {
@@ -9,9 +11,9 @@ class EbookingApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: lightThemeData(context),
+      darkTheme: darkThemeData(context),
+      themeMode: ThemeMode.system,
       home: const Scaffold(),
     );
   }
